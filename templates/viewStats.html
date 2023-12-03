@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tutoring Session Tracker</title>
+        <style>
+            .form-container {
+                display: flex;
+            }
+            .form-container form {
+                width: 30%;
+                margin: 10px;
+                text-align: center;
+            }
+            table, th, td{
+                border: 1px solid black;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+            }
+            .grid-item {
+                padding: 10px 10px 10px 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <form action="{{ url_for('viewClass') }}" method="post">
+                <label>View Information for a specific class: </label>
+                <br>
+                <!-- <input type="" list="items" name="selectedItem" id="selectedItem" placeholder="Select a class" readonly onfocus="this.removeAttribute('readonly')"> -->
+                <select id="items" name="singleClass">
+                    {% for item in items %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit">
+            </form>
+            <form action="{{ url_for('viewAllClasses') }}" method="get">
+                <label>View information for all classes</label>
+                <br>
+                <input type="submit">
+            </form>
+            <form action="{{ url_for('viewStudent') }}" method="post">
+                <label>View information for student</label>
+                <br>
+                <label for="student_id">Student ID:</label>
+                <input type="text" id="student_id" name="student_id">
+                <input type="submit">
+            </form>
+        </div>
+
+        <br>
+        <br>
+
+
+        <h3>{{ studentInfo[0] }}</h3>
+        <h3>{{ studentInfo[1] }} {{ studentInfo[2] }}</h3>
+
+        <div class="grid-container">
+            {% for index in tables %}
+                <div class="grid-item">
+                    <table style="width: 80%; text-align: center;">
+                        <tr>
+                            <th>{{ title[index] }}</th>
+                            <th>{{ title2 }}</th>
+                        </tr>
+                        {% for item in courses[index] %}
+                        <tr>
+                            <td>{{ item[0] }}</td>
+                            <td>{{ item[1] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tutoring Session Tracker</title>
+    </head>
+    <body>
+        <h2>Add Session</h2>
+        <form action="{{ url_for('addSession') }}" method="post">
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" required><br>
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required><br>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required><br>
+
+            <label for="course_number">Course Number:</label>
+            <!-- <input type="text" id="course_number" name="course_number" required><br> -->
+
+            <select id="items" name="course_number">
+                {% for item in items %}
+                    <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="section">Section:</label>
+            <input type="text" id="section" name="section" required><br>
+
+            <label for="duration">Duration(minutes):</label>
+            <input type="text" id="duration" name="duration" required><br>
+
+            <input type="submit" value="submit">
+        </form>
+    </body>
+</html>
